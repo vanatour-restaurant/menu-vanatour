@@ -1,28 +1,16 @@
-import heroImg from "@/assets/hero-dish.jpg";
 import logo from "@/assets/vanatour-logo.jpg";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Signature dish at Vanatour restaurant"
-        width={1536}
-        height={1280}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-[var(--gradient-overlay)]" />
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black bg-center bg-no-repeat bg-contain md:bg-cover"
+      style={{ backgroundImage: `url(${logo})` }}
+    >
+      <div className="absolute inset-0 bg-black/40" />
 
-      <div className="relative z-10 container text-center text-background flex flex-col items-center">
-        <img
-          src={logo}
-          alt="Vanatour restaurant emblem"
-          width={1024}
-          height={1024}
-          className="w-72 sm:w-96 md:w-[28rem] lg:w-[32rem] h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.5)] mb-6"
-        />
-        <p className="text-xs md:text-sm uppercase tracking-[0.4em] text-gold mb-8">
+      <div className="relative z-10 container text-center text-background flex flex-col items-center pt-32">
+        <p className="text-xs md:text-sm uppercase tracking-[0.4em] text-gold mb-6 mt-[60vh] md:mt-[55vh]">
           Fine Dining · Seasonal Kitchen
         </p>
         <Button asChild variant="reserve" size="lg">
