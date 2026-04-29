@@ -7,9 +7,9 @@ const About = () => {
           “Good food is the foundation of <span className="italic">genuine happiness.</span>”
         </h2>
         <p className="text-primary-foreground/80 leading-relaxed mb-4">
-          For over two decades, Maison Olive has been a quiet corner where families gather, friends linger, and meals are made to be remembered. Our chef, Élise Marchand, leads a kitchen rooted in Mediterranean tradition with a quiet, modern hand.
+          For over two decades, Vanatour has been a quiet corner where families gather, friends linger, and meals are made to be remembered. Our chef leads a kitchen rooted in tradition with a quiet, modern hand.
         </p>
-        <p className="font-serif italic text-gold mt-8">— Chef Élise Marchand</p>
+        <p className="font-serif italic text-gold mt-8">— The Vanatour Kitchen</p>
       </div>
     </section>
   );
