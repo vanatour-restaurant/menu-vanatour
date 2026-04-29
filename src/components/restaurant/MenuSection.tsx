@@ -1,6 +1,7 @@
 import starterImg from "@/assets/dish-starter.jpg";
 import mainImg from "@/assets/dish-main.jpg";
 import dessertImg from "@/assets/dish-dessert.jpg";
+import drinksImg from "@/assets/dish-drinks.jpg";
 
 type Item = { name: string; desc: string; price: string };
 
@@ -32,6 +33,17 @@ const sections: { title: string; image?: string; items: Item[] }[] = [
       { name: "Dark Chocolate Fondant", desc: "Vanilla bean ice cream, fresh berries", price: "11" },
       { name: "Crème Brûlée", desc: "Madagascan vanilla, almond tuile", price: "10" },
       { name: "Tarte Tatin", desc: "Caramelized apples, crème fraîche", price: "12" },
+    ],
+  },
+  {
+    title: "Drinks",
+    image: drinksImg,
+    items: [
+      { name: "House Red", desc: "Areni Noir, Vayots Dzor — glass / bottle", price: "8 / 32" },
+      { name: "House White", desc: "Voskehat, crisp and aromatic — glass / bottle", price: "7 / 28" },
+      { name: "Signature Cocktail", desc: "Apricot brandy, citrus, rosemary", price: "12" },
+      { name: "Armenian Coffee", desc: "Traditional jezve brew, cardamom", price: "4" },
+      { name: "Fresh Pomegranate Juice", desc: "Cold-pressed, locally sourced", price: "6" },
     ],
   },
 ];
