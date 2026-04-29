@@ -1,6 +1,7 @@
 import starterImg from "@/assets/dish-starter.jpg";
 import mainImg from "@/assets/dish-main.jpg";
 import dessertImg from "@/assets/dish-dessert.jpg";
+import drinksImg from "@/assets/dish-drinks.jpg";
 
 type Item = { name: string; desc: string; price: string };
 
