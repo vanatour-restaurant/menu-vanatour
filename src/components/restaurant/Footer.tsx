@@ -1,21 +1,13 @@
 const Footer = () => {
   return (
     <footer id="visit" className="bg-background border-t border-border py-20">
-      <div className="container grid md:grid-cols-3 gap-12 text-center md:text-left">
+      <div className="container grid md:grid-cols-2 gap-12 text-center md:text-left">
         <div>
           <h3 className="font-serif text-xl text-primary mb-4">Address</h3>
           <p className="text-muted-foreground text-sm leading-relaxed">
             Ջրվեժ, Թևոսյան 56<br />
             Երևան, Հայաստան<br />
             Yerevan, Armenia · 0076
-          </p>
-        </div>
-        <div>
-          <h3 className="font-serif text-xl text-primary mb-4">Hours</h3>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            Tue – Thu · 6pm – 10pm<br />
-            Fri – Sat · 6pm – 11pm<br />
-            Sunday Brunch · 11am – 3pm
           </p>
         </div>
         <div>
