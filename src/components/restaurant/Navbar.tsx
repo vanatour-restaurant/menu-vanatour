@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import logo from "@/assets/vanatour-logo.jpg";
 
 const links = [
   { label: "Menu", href: "#menu" },
@@ -10,8 +10,17 @@ const Navbar = () => {
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
       <nav className="container flex items-center justify-between py-6">
-        <a href="#" className="font-serif text-2xl font-semibold text-background tracking-wide">
-          Maison <span className="italic text-gold">Olive</span>
+        <a href="#" className="flex items-center gap-3">
+          <img
+            src={logo}
+            alt="Vanatour restaurant logo"
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full object-cover ring-1 ring-gold/40"
+          />
+          <span className="font-serif text-xl md:text-2xl font-semibold text-background tracking-[0.25em]">
+            VANATOUR
+          </span>
         </a>
         <ul className="hidden md:flex items-center gap-10">
           {links.map((l) => (
@@ -25,7 +34,6 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <Button variant="reserve" size="sm">Reserve</Button>
       </nav>
     </header>
   );

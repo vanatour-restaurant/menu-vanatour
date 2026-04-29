@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="container mt-16 pt-8 border-t border-border text-center text-xs text-muted-foreground tracking-widest uppercase">
-        © {new Date().getFullYear()} Maison Olive · Crafted with care
+        © {new Date().getFullYear()} Vanatour · Crafted with care
       </div>
     </footer>
   );
