@@ -1,4 +1,4 @@
-import logo from "@/assets/vanatour-logo.png";
+import logo from "@/assets/vanatour-logo.jpg";
 
 const links = [
   { label: "Menu", href: "#menu" },

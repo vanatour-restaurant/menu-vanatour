@@ -1,5 +1,5 @@
 import heroImg from "@/assets/hero-dish.jpg";
-import logo from "@/assets/vanatour-logo.png";
+import logo from "@/assets/vanatour-logo.jpg";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
