@@ -1,4 +1,4 @@
-import logo from "@/assets/vanatour-logo.jpg";
+import logo from "@/assets/vanatour-logo.png";
 
 const links = [
   { label: "Menu", href: "#menu" },
@@ -16,7 +16,7 @@ const Navbar = () => {
             alt="Vanatour restaurant logo"
             width={48}
             height={48}
-            className="h-12 w-12 rounded-full object-cover ring-1 ring-gold/40"
+            className="h-12 w-12 object-contain"
           />
           <span className="font-serif text-xl md:text-2xl font-semibold text-background tracking-[0.25em]">
             VANATOUR
