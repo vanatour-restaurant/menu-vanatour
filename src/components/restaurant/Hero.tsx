@@ -26,7 +26,7 @@ const Hero = () => {
           className="text-xs md:text-sm uppercase tracking-[0.4em] mb-8"
           style={{ color: "#FFE8BE" }}
         >
-          Բարձրակարգ ճաշարան · Սեզոնային խոհանոց
+          Welcome to Vanatour
         </p>
         <Button
           asChild
