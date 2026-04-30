@@ -60,6 +60,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border;
   }
@@ -68,6 +72,11 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     font-weight: 300;
+  }
+
+  section[id],
+  footer[id] {
+    scroll-margin-top: 1rem;
   }
 
   h1, h2, h3, h4, .font-serif {
