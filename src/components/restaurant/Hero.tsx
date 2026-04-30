@@ -22,16 +22,27 @@ const Hero = () => {
           height={400}
           className="w-56 sm:w-64 md:w-80 h-auto rounded-full object-cover ring-1 ring-gold/40 shadow-[var(--shadow-soft)] mb-10"
         />
-        <p className="text-xs md:text-sm uppercase tracking-[0.4em] text-gold mb-8">
-          Fine Dining · Seasonal Kitchen
+        <p
+          className="text-xs md:text-sm uppercase tracking-[0.4em] mb-8"
+          style={{ color: "#FFE8BE" }}
+        >
+          Բարձրակարգ ճաշարան · Սեզոնային խոհանոց
         </p>
-        <Button asChild variant="reserve" size="lg">
-          <a href="#menu">View Menu</a>
+        <Button
+          asChild
+          size="lg"
+          className="hover:opacity-90"
+          style={{ backgroundColor: "#FFE8BE", color: "#000000" }}
+        >
+          <a href="#menu">Դիտել ընտրացանկը</a>
         </Button>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-background/70 text-xs tracking-[0.3em] uppercase z-10">
-        Scroll
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] uppercase z-10"
+        style={{ color: "#FFE8BE", opacity: 0.8 }}
+      >
+        Ոլորել
       </div>
     </section>
   );
