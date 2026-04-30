@@ -354,11 +354,11 @@ const MenuSection = () => {
                 {section.items.map((item, i) => (
                   <li key={i}>
                     <div className="flex items-baseline gap-3">
-                      <h4 className="font-serif text-base md:text-lg text-foreground">
+                      <h4 className="text-base md:text-lg text-foreground font-normal">
                         {lang === "hy" ? item.hy : item.en}
                       </h4>
                       <span className="flex-1 dotted-leader h-3" aria-hidden />
-                      <span className="font-serif text-base md:text-lg text-accent font-semibold whitespace-nowrap">
+                      <span className="text-base md:text-lg text-accent font-medium whitespace-nowrap">
                         {item.price} {item.price !== "—" && t.currency}
                       </span>
                     </div>
