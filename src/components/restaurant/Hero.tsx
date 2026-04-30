@@ -26,7 +26,7 @@ const Hero = () => {
           className="text-xs md:text-sm uppercase tracking-[0.4em] mb-8"
           style={{ color: "#FFE8BE" }}
         >
-          Բարձրակարգ ճաշարան · Սեզոնային խոհանոց
+          Welcome to Vanatour
         </p>
         <Button
           asChild
@@ -34,7 +34,7 @@ const Hero = () => {
           className="hover:opacity-90"
           style={{ backgroundColor: "#FFE8BE", color: "#000000" }}
         >
-          <a href="#menu">Դիտել ընտրացանկը</a>
+          <a href="#menu">Ընտրացանկ</a>
         </Button>
       </div>
 

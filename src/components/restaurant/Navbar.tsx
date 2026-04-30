@@ -1,7 +1,7 @@
 import logo from "@/assets/vanatour-logo.jpg";
 
 const links = [
-  { label: "Menu", href: "#menu" },
+  { label: "Ընտրացանկ", href: "#menu" },
   { label: "About", href: "#about" },
   { label: "Visit", href: "#visit" },
 ];
@@ -18,9 +18,6 @@ const Navbar = () => {
             height={48}
             className="h-12 w-12 object-contain"
           />
-          <span className="font-serif text-xl md:text-2xl font-semibold text-background tracking-[0.25em]">
-            VANATOUR
-          </span>
         </a>
         <ul className="hidden md:flex items-center gap-10">
           {links.map((l) => (
