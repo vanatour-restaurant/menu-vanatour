@@ -1,109 +1,372 @@
-import starterImg from "@/assets/dish-starter.jpg";
-import mainImg from "@/assets/dish-main.jpg";
-import dessertImg from "@/assets/dish-dessert.jpg";
-import drinksImg from "@/assets/dish-drinks.jpg";
+import { useState } from "react";
 
-type Item = { name: string; desc: string; price: string };
+type Lang = "hy" | "en";
 
-const sections: { title: string; image?: string; items: Item[] }[] = [
+type Item = { hy: string; en: string; price: string };
+type Section = { hy: string; en: string; items: Item[] };
+
+const sections: Section[] = [
   {
-    title: "Starters",
-    image: starterImg,
+    hy: "Նախուտեստներ",
+    en: "Appetizers",
     items: [
-      { name: "Heirloom Tomato Salad", desc: "Aged balsamic, basil oil, burrata cream", price: "14" },
-      { name: "Charred Octopus", desc: "Smoked paprika, fingerling potato, lemon", price: "18" },
-      { name: "Wild Mushroom Tartine", desc: "Sourdough, thyme butter, parmesan", price: "13" },
-      { name: "Country Pâté", desc: "Cornichons, grain mustard, baguette", price: "12" },
+      { hy: "Իկրա", en: "Caviar", price: "4500" },
+      { hy: "Ձկան տեսականի (սյոմգա, մասլենի)", en: "Fish assortment (salmon, butterfish)", price: "10000" },
+      { hy: "Հայկական պանրի տեսականի", en: "Armenian cheese assortment", price: "2300" },
+      { hy: "Եվրոպական պանրի տեսականի", en: "European cheese assortment", price: "4300" },
+      { hy: "Մսի տեսականի", en: "Meat assortment", price: "4800" },
+      { hy: "Տնական մսի տեսականի", en: "Homemade meat assortment", price: "5500" },
+      { hy: "Մարինադ", en: "Marinated vegetables", price: "1700" },
+      { hy: "Թթվի տեսականի", en: "Pickled vegetables assortment", price: "1700" },
+      { hy: "Լիմոն, զեյթուն", en: "Lemon, olives", price: "2000" },
+      { hy: "Քամած մածուն", en: "Strained yogurt", price: "1000" },
+      { hy: "Ռեժան", en: "Ryazhenka", price: "1200" },
+      { hy: "Կանաչի", en: "Greens", price: "800" },
+      { hy: "Թարմ բանջարեղեն", en: "Fresh vegetables", price: "2500" },
+      { hy: "Չորի բիբար", en: "Hot chili pepper", price: "500" },
+      { hy: "Հաց", en: "Bread", price: "800" },
     ],
   },
   {
-    title: "Main Courses",
-    image: mainImg,
+    hy: "Աղցաններ",
+    en: "Salads",
     items: [
-      { name: "Grilled Ribeye", desc: "Rosemary jus, roasted root vegetables", price: "38" },
-      { name: "Pan-Seared Sea Bass", desc: "Saffron broth, fennel, cherry tomato", price: "32" },
-      { name: "Duck Confit", desc: "Cherry gastrique, potato gratin", price: "29" },
-      { name: "Wild Mushroom Risotto", desc: "Black truffle shavings, aged pecorino", price: "26" },
+      { hy: "Ամառային աղցան", en: "Summer salad", price: "2500" },
+      { hy: "Հունական աղցան", en: "Greek salad", price: "3000" },
+      { hy: "Կեսար (հավով / կրեվետկայով)", en: "Caesar (chicken / shrimp)", price: "3600 / 4500" },
+      { hy: "Մայրաքաղաքային աղցան", en: "Capital salad", price: "2000" },
+      { hy: "Հավով աղցան", en: "Chicken salad", price: "2500" },
+      { hy: "Տաք աղցան", en: "Warm salad", price: "4000" },
+      { hy: "Կանաչ աղցան", en: "Green salad", price: "2500" },
+      { hy: "Ֆունչոզային աղցան", en: "Funchoza salad", price: "2700" },
+      { hy: "Սմբուկի ռոլլ սոուսով", en: "Eggplant rolls with sauce", price: "1600" },
+      { hy: "Հումուս", en: "Hummus", price: "1500" },
+      { hy: "Մութաբալ", en: "Mutabal", price: "2000" },
+      { hy: "Կապրեզե", en: "Caprese", price: "2200" },
+      { hy: "Սմբուկի նախուտեստ", en: "Eggplant appetizer", price: "2500" },
+      { hy: "Բուլղարական աղցան", en: "Bulgarian salad", price: "—" },
     ],
   },
   {
-    title: "Desserts",
-    image: dessertImg,
+    hy: "Ապուրներ",
+    en: "Soups",
     items: [
-      { name: "Dark Chocolate Fondant", desc: "Vanilla bean ice cream, fresh berries", price: "11" },
-      { name: "Crème Brûlée", desc: "Madagascan vanilla, almond tuile", price: "10" },
-      { name: "Tarte Tatin", desc: "Caramelized apples, crème fraîche", price: "12" },
+      { hy: "Սպաս", en: "Spas", price: "1200" },
+      { hy: "Սալյանկա", en: "Solyanka", price: "1800" },
+      { hy: "Բորշ", en: "Borscht", price: "1700" },
+      { hy: "Խարչո", en: "Kharcho", price: "1700" },
+      { hy: "Փիթի", en: "Piti", price: "1700" },
+      { hy: "Հավով ապուր", en: "Chicken soup", price: "1500" },
     ],
   },
   {
-    title: "Drinks",
-    image: drinksImg,
+    hy: "Տաք ուտեստներ",
+    en: "Hot Dishes",
     items: [
-      { name: "House Red", desc: "Areni Noir, Vayots Dzor — glass / bottle", price: "8 / 32" },
-      { name: "House White", desc: "Voskehat, crisp and aromatic — glass / bottle", price: "7 / 28" },
-      { name: "Signature Cocktail", desc: "Apricot brandy, citrus, rosemary", price: "12" },
-      { name: "Armenian Coffee", desc: "Traditional jezve brew, cardamom", price: "4" },
-      { name: "Fresh Pomegranate Juice", desc: "Cold-pressed, locally sourced", price: "6" },
+      { hy: "Խոզի խառը խորոված", en: "Mixed pork", price: "3600" },
+      { hy: "Խոզի չալաղաջ", en: "Pork chalagach", price: "3700" },
+      { hy: "Խոզի մատեր", en: "Pork loin", price: "3700" },
+      { hy: "Խոզի մսով խորոված", en: "Tender pork", price: "3500" },
+      { hy: "Խոզի ռիբս", en: "Pork ribs", price: "5000" },
+      { hy: "Խոզի ժարկո", en: "Pork zharko", price: "2500" },
+      { hy: "Խոզի իքի-բիր", en: "Pork iki-bir", price: "1500" },
+      { hy: "Տավարի չալաղաջ սոուսով", en: "Beef chalagach with sauce", price: "10000 / kg" },
+      { hy: "Տավարի շեյկա", en: "Beef sheyka", price: "10000 / kg" },
+      { hy: "Տավարի խաշլամա", en: "Beef khashlama", price: "4000" },
+      { hy: "Տավարի սիրտ", en: "Beef heart", price: "2500" },
+      { hy: "Տավարի թոք", en: "Beef lungs", price: "2500" },
+      { hy: "Տավարի խաշլամա խմորի մեջ", en: "Beef khashlama in dough (4 pers.)", price: "18000" },
+      { hy: "Տավարի քյաբաբ", en: "Beef kebab", price: "1300" },
+      { hy: "Տավարի կտրտած մսով քյաբաբ", en: "Chopped beef kebab", price: "2000" },
+      { hy: "Տավարի մսով խորջին", en: "Beef khorjin", price: "2500" },
+      { hy: "Տոլմա (ամառային / թփով / կաղամբով)", en: "Dolma (summer / grape leaves / cabbage)", price: "2500 / 3000" },
+      { hy: "Դեվոլյե հավի", en: "Chicken devolay", price: "6000" },
+      { hy: "Կյուֆթա", en: "Kyufta (1 portion)", price: "7000" },
+      { hy: "Գառան խաշլամա", en: "Lamb khashlama", price: "3500" },
+      { hy: "Գառան չալաղաջ", en: "Lamb chalagach", price: "3500" },
+      { hy: "Գառան մատեր", en: "Lamb ribs", price: "3500" },
+      { hy: "Գառան փախիկ", en: "Tender lamb", price: "3400" },
+      { hy: "Գառան փարդա", en: "Lamb parda", price: "1800" },
+      { hy: "Գառան իքի-բիր", en: "Lamb iki-bir", price: "1800" },
+      { hy: "Գառան քյաբաբ", en: "Lamb kebab", price: "2000" },
+      { hy: "Գառան մսով խորոված", en: "Lamb khorjin", price: "3000" },
+      { hy: "Գառան թիակ սոուսով", en: "Lamb shoulder with sauce", price: "14000" },
+      { hy: "Գառան թիակ լավաշով", en: "Lamb shoulder with lavash", price: "14000" },
+      { hy: "Տնական հավ", en: "Homemade chicken", price: "8000" },
+      { hy: "Հավ", en: "Spring chicken", price: "1700" },
+      { hy: "Հավի քյաբաբ", en: "Chicken kebab", price: "1200" },
+      { hy: "Հավի թևեր", en: "Chicken wings", price: "1500" },
+      { hy: "Հավի ոտքեր", en: "Chicken thighs", price: "1500" },
+      { hy: "Հավի դոշ", en: "Chicken breast", price: "1500" },
+      { hy: "Հավ խորոված", en: "Grilled chicken", price: "4000" },
+      { hy: "Հնդկահավի խորոված", en: "Grilled turkey", price: "18000" },
+      { hy: "Նրբաբլիթ", en: "Pancakes", price: "1500" },
+      { hy: "Չախոխբիլի հավի", en: "Chicken chakhokhbili", price: "2500" },
+      { hy: "Չախոխբիլի նապաստակի", en: "Rabbit chakhokhbili", price: "3500" },
+      { hy: "Նապաստակի խորոված", en: "Grilled rabbit", price: "8000" },
+      { hy: "Խորոված սունկ", en: "Grilled mushrooms", price: "2000" },
+      { hy: "Խոզի ուռուց (rulka)", en: "Pork knuckle (rulka)", price: "16000" },
+    ],
+  },
+  {
+    hy: "Խորոված ձուկ",
+    en: "Grilled Fish",
+    items: [
+      { hy: "Ստերլյադ", en: "Sterlet", price: "12000 / kg" },
+      { hy: "Իշխան", en: "Ishkhan (trout)", price: "6000" },
+      { hy: "Կարմրախայտ", en: "Red trout", price: "3500 / 100g" },
+      { hy: "Կարմրախայտ խմորի մեջ", en: "Red trout in batter", price: "—" },
+      { hy: "Կրեվետկա", en: "Shrimp (1 portion)", price: "6000" },
+      { hy: "Իշխան լավաշով", en: "Ishkhan in lavash", price: "8000" },
+    ],
+  },
+  {
+    hy: "Խավարտներ",
+    en: "Sides",
+    items: [
+      { hy: "Լցոնած կարտոֆիլ", en: "Stuffed potatoes", price: "2000" },
+      { hy: "Պյուրե", en: "Mashed potatoes", price: "800" },
+      { hy: "Ժմուր", en: "Jmurr", price: "1000" },
+      { hy: "Պլեճ", en: "Plech", price: "500" },
+      { hy: "Գյուղական", en: "Country-style potatoes", price: "1000" },
+      { hy: "Սպագետտի", en: "Spaghetti", price: "1000" },
+      { hy: "Ռիզոտտո", en: "Risotto", price: "1000" },
+      { hy: "Ֆրի", en: "Fries", price: "800" },
+      { hy: "Շիլա", en: "Porridge", price: "700" },
+      { hy: "Արիշտա", en: "Arishta", price: "700" },
+      { hy: "Հարիսա", en: "Harisa", price: "2000" },
+      { hy: "Գրիլ բանջարեղեն", en: "Grilled vegetables", price: "700" },
+      { hy: "Բանջարեղեն խորոված", en: "Grilled vegetables (large)", price: "1500 / 2000" },
+    ],
+  },
+  {
+    hy: "Կանաչեղեն",
+    en: "Greens",
+    items: [
+      { hy: "Սիբեխ", en: "Sibekh", price: "2500" },
+      { hy: "Մանդակ", en: "Mandak", price: "2500" },
+      { hy: "Խնջլուզ", en: "Khnjluz", price: "2500" },
+      { hy: "Դանդուր", en: "Dandur", price: "1000" },
+      { hy: "Ծնեբեկ", en: "Asparagus", price: "3500" },
+      { hy: "Սպանախ", en: "Spinach", price: "1700" },
+      { hy: "Բաղնիկ ճակնդեղ", en: "Beetroot salad", price: "1700" },
+      { hy: "Կանաչ լոբի", en: "Green beans", price: "2000" },
+    ],
+  },
+  {
+    hy: "Ձվածեղ",
+    en: "Egg Dishes",
+    items: [
+      { hy: "Ոլոռով", en: "With peas", price: "2000" },
+      { hy: "Սնկով", en: "With mushrooms", price: "2000" },
+      { hy: "Բաստուրմայով", en: "With basturma", price: "2000" },
+      { hy: "Ղավուրմայով", en: "With ghavurma", price: "2500" },
+      { hy: "Լոլիկով", en: "With tomatoes", price: "1800" },
+    ],
+  },
+  {
+    hy: "Սոուսներ",
+    en: "Sauces",
+    items: [
+      { hy: "Կետչուպ", en: "Ketchup", price: "500" },
+      { hy: "Մայոնեզ", en: "Mayonnaise", price: "500" },
+      { hy: "Թթվասեր", en: "Sour cream", price: "500" },
+      { hy: "Նարշարաբ", en: "Narsharab", price: "500" },
+    ],
+  },
+  {
+    hy: "Աղանդեր",
+    en: "Desserts",
+    items: [
+      { hy: "Գաթա", en: "Gata", price: "2000" },
+      { hy: "Փախլավա", en: "Baklava", price: "1500" },
+    ],
+  },
+  {
+    hy: "Օղի",
+    en: "Vodka",
+    items: [
+      { hy: "STOLI", en: "STOLI", price: "9000" },
+      { hy: "ORGANIK", en: "ORGANIK", price: "9000" },
+      { hy: "STUMBRAS", en: "STUMBRAS", price: "8000" },
+      { hy: "ABSOLUT", en: "ABSOLUT", price: "10000" },
+      { hy: "OHANYAN", en: "OHANYAN", price: "9000" },
+      { hy: "OHANYAN ICE", en: "OHANYAN ICE", price: "10000" },
+      { hy: "OHANYAN FANTOM", en: "OHANYAN FANTOM", price: "11000" },
+      { hy: "CHISTI ROSI", en: "CHISTI ROSI", price: "16000" },
+      { hy: "ONEGIN", en: "ONEGIN", price: "16000" },
+      { hy: "GREY GOOSE", en: "GREY GOOSE", price: "25000" },
+      { hy: "KREMLIN", en: "KREMLIN", price: "12000" },
+      { hy: "NALBANDYAN", en: "NALBANDYAN", price: "9000" },
+      { hy: "FINLANDIA", en: "FINLANDIA", price: "9000" },
+      { hy: "ARKHANGELSKAYA", en: "ARKHANGELSKAYA", price: "7000" },
+      { hy: "CARSKAYA", en: "CARSKAYA", price: "7000" },
+    ],
+  },
+  {
+    hy: "Գինի",
+    en: "Wine",
+    items: [
+      { hy: "Կարաս", en: "Karas", price: "8000" },
+      { hy: "Տակառ", en: "Takar", price: "8000" },
+      { hy: "Կոր", en: "Koor", price: "10000" },
+      { hy: "Արմենիա", en: "Armenia", price: "3000" },
+      { hy: "Վերնաշեն", en: "Vernashen", price: "3000" },
+      { hy: "Թարիրի", en: "Tariri", price: "16000" },
+      { hy: "Տնական գինի", en: "Homemade wine", price: "3500" },
+      { hy: "Մերլո", en: "Merlot", price: "8000" },
+      { hy: "Շամպայն", en: "Champagne", price: "3000" },
+    ],
+  },
+  {
+    hy: "Վիսկի, Ջին, Տեկիլա, Ռոմ",
+    en: "Whisky, Gin, Tequila, Rum",
+    items: [
+      { hy: "Չիվաս 12, 15", en: "Chivas 12, 15", price: "2500 / 3500 / 50g" },
+      { hy: "Ջեկ Դենիելս", en: "Jack Daniel's", price: "2000 / 50g" },
+      { hy: "Ջին", en: "Gin", price: "2500 / 50g" },
+      { hy: "Օլմեկա սպիտակ, դեղին", en: "Olmeca white, gold", price: "1800 / 50g" },
+      { hy: "Բակարդի սև, սպիտակ", en: "Bacardi black, white", price: "2500 / 50g" },
+    ],
+  },
+  {
+    hy: "Զովացուցիչ ըմպելիքներ",
+    en: "Beverages",
+    items: [
+      { hy: "Բյուրեղ", en: "Water", price: "300" },
+      { hy: "Ջերմուկ", en: "Jermuk", price: "300" },
+      { hy: "Կոլա, Ֆանտա", en: "Cola, Fanta", price: "300" },
+      { hy: "Պեպսի, Միրինդա", en: "Pepsi, Mirinda", price: "300" },
+      { hy: "Կոմպոտ", en: "Compote", price: "1500" },
+      { hy: "Մոխիտո", en: "Mojito", price: "2000" },
+      { hy: "Բջնի", en: "Bjni", price: "300" },
+    ],
+  },
+  {
+    hy: "Գարեջուր",
+    en: "Beer",
+    items: [
+      { hy: "Կիլիկիա", en: "Kilikia", price: "600" },
+      { hy: "Գյումրի", en: "Gyumri", price: "800" },
+      { hy: "Հեյնեկեն", en: "Heineken", price: "1000" },
+      { hy: "Միլլեր", en: "Miller", price: "1000" },
+      { hy: "Ստելլա", en: "Stella", price: "1000" },
+      { hy: "HB", en: "HB", price: "1600" },
+      { hy: "Պաուլաներ", en: "Paulaner", price: "1500" },
+      { hy: "Կորոնա", en: "Corona", price: "1200" },
+    ],
+  },
+  {
+    hy: "Գարեջրի խորտիկներ",
+    en: "Beer Snacks",
+    items: [
+      { hy: "Ջերկի", en: "Jerky", price: "1000 / 1500" },
+      { hy: "Չիպս", en: "Chips", price: "1500" },
+      { hy: "Ֆստախ", en: "Pistachios", price: "1500" },
+      { hy: "Ֆիստաշկա", en: "Pistachio", price: "1000" },
+      { hy: "Ապխտած պանիր", en: "Smoked cheese", price: "1200" },
+      { hy: "Գրենկի", en: "Croutons", price: "800" },
+      { hy: "Աղի ձողիկներ", en: "Salted sticks", price: "—" },
+      { hy: "Ֆրի", en: "Fries", price: "700" },
+      { hy: "Ռիբս", en: "Ribs", price: "5000" },
+      { hy: "Գերմանական նրբերշիկ", en: "German sausages", price: "7000" },
+      { hy: "Պանրի գնդիկներ", en: "Cheese balls", price: "1500" },
+      { hy: "Կրեվետկա", en: "Shrimp", price: "1500 / 100g" },
     ],
   },
 ];
 
+const ui = {
+  hy: {
+    eyebrow: "Մեր Ճաշացանկը",
+    title: "Պատրաստված ",
+    titleItalic: "սիրով",
+    subtitle: "Ճաշատեսակների ավանդական և ժամանակակից համադրություն՝ թարմ, տեղական բաղադրիչներով։",
+    currency: "֏",
+    armenian: "Հայերեն",
+    english: "English",
+  },
+  en: {
+    eyebrow: "Our Menu",
+    title: "Crafted with ",
+    titleItalic: "intention",
+    subtitle: "A blend of Armenian tradition and modern technique — sourced fresh, served with care.",
+    currency: "AMD",
+    armenian: "Հայերեն",
+    english: "English",
+  },
+};
+
 const MenuSection = () => {
+  const [lang, setLang] = useState<Lang>("hy");
+  const t = ui[lang];
+
   return (
     <section id="menu" className="py-24 md:py-32 bg-background">
       <div className="container">
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <p className="text-xs uppercase tracking-[0.4em] text-accent mb-4">Our Menu</p>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="text-xs uppercase tracking-[0.4em] text-accent mb-4">{t.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl text-primary mb-6">
-            Crafted with <span className="italic">intention</span>
+            {t.title}
+            <span className="italic">{t.titleItalic}</span>
           </h2>
-          <p className="text-muted-foreground">
-            Sourced daily from local farmers and fishermen. Our menu shifts gently with the seasons.
-          </p>
+          <p className="text-muted-foreground">{t.subtitle}</p>
         </div>
 
-        <div className="space-y-24">
-          {sections.map((section, idx) => (
-            <div
-              key={section.title}
-              className={`grid md:grid-cols-5 gap-10 md:gap-16 items-center ${
-                idx % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
+        <div className="flex justify-center mb-16">
+          <div
+            role="tablist"
+            aria-label="Language"
+            className="inline-flex border border-border rounded-full p-1 bg-card"
+          >
+            <button
+              role="tab"
+              aria-selected={lang === "hy"}
+              onClick={() => setLang("hy")}
+              className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors ${
+                lang === "hy"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <div className="md:col-span-2">
-                <div className="relative overflow-hidden rounded-sm shadow-[var(--shadow-soft)] group">
-                  <img
-                    src={section.image}
-                    alt={`${section.title} dish presentation`}
-                    width={800}
-                    height={800}
-                    loading="lazy"
-                    className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-              </div>
+              {ui.hy.armenian}
+            </button>
+            <button
+              role="tab"
+              aria-selected={lang === "en"}
+              onClick={() => setLang("en")}
+              className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors ${
+                lang === "en"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {ui.en.english}
+            </button>
+          </div>
+        </div>
 
-              <div className="md:col-span-3">
-                <h3 className="font-serif text-3xl md:text-4xl text-primary mb-8 italic">
-                  {section.title}
-                </h3>
-                <ul className="space-y-6">
-                  {section.items.map((item) => (
-                    <li key={item.name} className="group">
-                      <div className="flex items-baseline gap-3">
-                        <h4 className="font-serif text-xl text-foreground whitespace-nowrap">
-                          {item.name}
-                        </h4>
-                        <span className="flex-1 dotted-leader h-4" aria-hidden />
-                        <span className="font-serif text-xl text-accent font-semibold">
-                          ${item.price}
-                        </span>
-                      </div>
-                      <p className="text-sm text-muted-foreground mt-1 max-w-md">{item.desc}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-20 max-w-5xl mx-auto">
+          {sections.map((section) => (
+            <div key={section.en}>
+              <h3 className="font-serif text-2xl md:text-3xl text-primary mb-8 italic border-b border-border pb-4">
+                {lang === "hy" ? section.hy : section.en}
+              </h3>
+              <ul className="space-y-5">
+                {section.items.map((item, i) => (
+                  <li key={i}>
+                    <div className="flex items-baseline gap-3">
+                      <h4 className="font-serif text-base md:text-lg text-foreground">
+                        {lang === "hy" ? item.hy : item.en}
+                      </h4>
+                      <span className="flex-1 dotted-leader h-3" aria-hidden />
+                      <span className="font-serif text-base md:text-lg text-accent font-semibold whitespace-nowrap">
+                        {item.price} {item.price !== "—" && t.currency}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
