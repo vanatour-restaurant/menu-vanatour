@@ -323,10 +323,9 @@ const MenuSection = () => {
               role="tab"
               aria-selected={lang === "hy"}
               onClick={() => setLang("hy")}
+              style={lang === "hy" ? { backgroundColor: "#FFE8BE", color: "#000000" } : undefined}
               className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors ${
-                lang === "hy"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                lang === "hy" ? "" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {ui.hy.armenian}
@@ -335,10 +334,9 @@ const MenuSection = () => {
               role="tab"
               aria-selected={lang === "en"}
               onClick={() => setLang("en")}
+              style={lang === "en" ? { backgroundColor: "#FFE8BE", color: "#000000" } : undefined}
               className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors ${
-                lang === "en"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                lang === "en" ? "" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {ui.en.english}
