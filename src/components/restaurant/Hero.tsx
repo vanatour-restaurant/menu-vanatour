@@ -34,7 +34,7 @@ const Hero = () => {
           className="hover:opacity-90"
           style={{ backgroundColor: "#FFE8BE", color: "#000000" }}
         >
-          <a href="#menu">Դիտել ընտրացանկը</a>
+          <a href="#menu">Ընտրացանկ</a>
         </Button>
       </div>
 
