@@ -1,7 +1,7 @@
 import logo from "@/assets/vanatour-logo.jpg";
 
 const links = [
-  { label: "Ընտրացանկ", href: "#menu" },
+  { label: "Մենյու", href: "#menu" },
   { label: "About", href: "#about" },
   { label: "Visit", href: "#visit" },
 ];
