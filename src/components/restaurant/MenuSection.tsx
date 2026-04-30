@@ -324,7 +324,7 @@ const MenuSection = () => {
               aria-selected={lang === "hy"}
               onClick={() => setLang("hy")}
               style={lang === "hy" ? { backgroundColor: "#FFE8BE", color: "#000000" } : undefined}
-              className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors ${
+              className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors font-semibold ${
                 lang === "hy" ? "" : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -335,7 +335,7 @@ const MenuSection = () => {
               aria-selected={lang === "en"}
               onClick={() => setLang("en")}
               style={lang === "en" ? { backgroundColor: "#FFE8BE", color: "#000000" } : undefined}
-              className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors ${
+              className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-colors font-semibold ${
                 lang === "en" ? "" : "text-muted-foreground hover:text-foreground"
               }`}
             >
