@@ -26,7 +26,7 @@ const Hero = () => {
           className="text-xs md:text-sm uppercase tracking-[0.4em] mb-8"
           style={{ color: "#FFE8BE" }}
         >
-          Welcome to Vanatour
+          Բարի գալուստ Վանատուր
         </p>
         <Button
           asChild
@@ -34,7 +34,7 @@ const Hero = () => {
           className="hover:opacity-90"
           style={{ backgroundColor: "#FFE8BE", color: "#000000" }}
         >
-          <a href="#menu">Ընտրացանկ</a>
+          <a href="#menu">Մենյու</a>
         </Button>
       </div>
 
