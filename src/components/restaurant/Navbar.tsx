@@ -2,7 +2,7 @@ import logo from "@/assets/vanatour-logo.jpg";
 
 const links = [
   { label: "Մենյու", href: "#menu" },
-  { label: "Contact us", href: "#visit" },
+  { label: "Հետադարձ կապ", href: "#visit" },
 ];
 
 const Navbar = () => {
