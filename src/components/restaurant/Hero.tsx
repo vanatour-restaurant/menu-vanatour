@@ -22,7 +22,7 @@ const Hero = () => {
           className="w-56 sm:w-64 md:w-80 h-auto rounded-full object-cover ring-1 ring-gold/40 shadow-[var(--shadow-soft)] mb-10"
         />
         <p
-          className="text-2xl md:text-4xl tracking-[0.1em] mb-8 font-serif"
+          className="text-xl md:text-4xl tracking-[0.1em] mb-8 font-serif"
           style={{ color: "#FFE8BE" }}
         >
           Բարի գալուստ Վանատուր Ռեստորան
