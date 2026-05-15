@@ -1,4 +1,5 @@
 import heroBg from "@/assets/hero-bg.jpg";
+import logo from "@/assets/vanatour-logo.jpg";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -13,6 +14,13 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-black/55" />
       <div className="relative z-10 container text-center text-background flex flex-col items-center">
+        <img
+          src={logo}
+          alt="Vanatour restaurant emblem"
+          width={400}
+          height={400}
+          className="w-56 sm:w-64 md:w-80 h-auto rounded-full object-cover ring-1 ring-gold/40 shadow-[var(--shadow-soft)] mb-10"
+        />
         <p
           className="text-2xl md:text-4xl uppercase tracking-[0.3em] mb-8 font-serif"
           style={{ color: "#FFE8BE" }}
