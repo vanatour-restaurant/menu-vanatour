@@ -1,5 +1,3 @@
-import { Instagram, Facebook, Phone } from "lucide-react";
-
 const Footer = () => {
   return (
     <footer id="visit" className="bg-background border-t border-border py-20">
@@ -14,31 +12,23 @@ const Footer = () => {
         </div>
         <div>
           <h3 className="font-serif text-xl text-primary mb-4">Contact</h3>
-          
-            href="tel:+374041551000"
-            className="flex items-center justify-center md:justify-start gap-2 text-muted-foreground text-sm hover:text-accent transition-colors mb-4"
-          >
-            <Phone size={15} />
-            041 551 000
+          <a href="tel:+374041551000" className="text-muted-foreground text-sm hover:text-accent transition-colors block mb-4">
+            📞 041 551 000
           </a>
-          <div className="flex items-center justify-center md:justify-start gap-4 mt-2">
-            
-              href="https://www.facebook.com/vanatourrestaurant/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="text-muted-foreground hover:text-accent transition-colors"
-            >
-              <Facebook size={20} />
+          <div className="flex items-center justify-center md:justify-start gap-4">
+            {/* Facebook */}
+            <a href="https://www.facebook.com/vanatourrestaurant/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-muted-foreground hover:text-accent transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
             </a>
-            
-              href="https://www.instagram.com/vanatour_restaurant/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-muted-foreground hover:text-accent transition-colors"
-            >
-              <Instagram size={20} />
+            {/* Instagram */}
+            <a href="https://www.instagram.com/vanatour_restaurant/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-foreground hover:text-accent transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
             </a>
           </div>
         </div>
