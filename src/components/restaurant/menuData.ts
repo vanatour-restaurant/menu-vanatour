@@ -97,7 +97,7 @@ export const sections: Section[] = [
       { hy: "Ճուտ", en: "Spring chicken", price: "1700" },
       { hy: "Հավի քյաբաբ", en: "Chicken kebab", price: "1200" },
       { hy: "Հավի թևեր", en: "Chicken wings", price: "1500" },
-      { hy: "Հավի ոտքեր", en: "Chicken thighs", price: "1500" },
+      { hy: "Հավի ուսիկ", en: "Chicken thighs", price: "1500" },
       { hy: "Հավի դոշ", en: "Chicken breast", price: "1500" },
       { hy: "Հավ", en: "Grilled chicken", price: "4000" },
       { hy: "Հնդկահավի խորոված", en: "Grilled turkey", price: "18000" },
