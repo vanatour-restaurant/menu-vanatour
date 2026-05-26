@@ -22,6 +22,7 @@ export const sections: Section[] = [
       { hy: "Լիմոն, զեյթուն", en: "Lemon, olives", price: "2000" },
       { hy: "Քամած մածուն", en: "Strained yogurt", price: "1000" },
       { hy: "Ռեժան", en: "Ryazhenka", price: "1200" },
+      { hy: "Ղավուրմա", en: "Ghavurma", price: "3800" },
       { hy: "Կանաչի", en: "Greens", price: "800" },
       { hy: "Թարմ բանջարեղեն", en: "Fresh vegetables", price: "2500" },
       { hy: "Կծու բիբար", en: "Hot chili pepper", price: "500" },
