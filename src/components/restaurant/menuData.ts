@@ -120,6 +120,7 @@ export const sections: Section[] = [
       { hy: "Կարմրախայտ խմորի մեջ", en: "Red trout in batter", price: "—" },
       { hy: "Կրեվետկա", en: "Shrimp (1 portion)", price: "6000" },
       { hy: "Իշխան լավաշով", en: "Ishkhan in lavash", price: "8000" },
+      { hy: "Սելդ կարտոֆիլով", en: "Herring with potatoes", price: "3000" },
     ],
   },
   {
