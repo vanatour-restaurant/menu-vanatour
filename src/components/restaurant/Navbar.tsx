@@ -18,13 +18,13 @@ const Navbar = () => {
             href="#menu"
             className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
           >
-            Մենյո型
+            Մենյու
           </a>
           <a
             href="#visit"
             className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
           >
-            Հետա噊ա堎ծ կապ
+            Հետադարց կապ
           </a>
         </div>
       </nav>
