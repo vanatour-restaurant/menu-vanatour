@@ -1,8 +1,5 @@
 import logo from "@/assets/vanatour-logo.jpg";
-const links = [
-  { label: "Մենյու", href: "#menu" },
-  { label: "Հետադարձ կապ", href: "#visit" },
-];
+
 const Navbar = () => {
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
@@ -16,20 +13,23 @@ const Navbar = () => {
             className="h-12 w-12 object-contain"
           />
         </a>
-        <ul className="hidden md:flex items-center gap-10">
-          {links.map((l) => (
-            <li key={l.href}>
-
-                href={l.href}
-                className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center gap-10">
+          <a
+            href="#menu"
+            className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
+          >
+            Մենյո型
+          </a>
+          <a
+            href="#visit"
+            className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
+          >
+            Հետա噊ա堎ծ կապ
+          </a>
+        </div>
       </nav>
     </header>
   );
 };
+
 export default Navbar;
