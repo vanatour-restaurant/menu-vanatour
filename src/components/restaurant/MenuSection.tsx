@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { sections, type Lang } from "./menuData";
-import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const ui = {
   hy: {
@@ -25,11 +25,13 @@ const ui = {
 
 const MenuSection = () => {
   const [lang, setLang] = useState<Lang>("hy");
-  const [openSection, setOpenSection] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const t = ui[lang];
 
-  const toggle = (key: string) => {
-    setOpenSection((prev) => (prev === key ? null : key));
+  const scrollToSection = (key: string) => {
+    setActiveSection(key);
+    sectionRefs.current[key]?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -47,7 +49,7 @@ const MenuSection = () => {
         </div>
 
         {/* Language Toggle */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-10">
           <div
             role="tablist"
             aria-label="Language"
@@ -78,75 +80,63 @@ const MenuSection = () => {
           </div>
         </div>
 
-        {/* Dropdown Menu */}
-        <div className="max-w-4xl mx-auto">
+        {/* Category Navigation Buttons */}
+        <div className="flex flex-wrap justify-center gap-2 mb-16">
+          {sections.map((section) => {
+            const key = section.en;
+            const label = lang === "hy" ? section.hy : section.en;
+            const isActive = activeSection === key;
 
-          {/* Category Tabs Row */}
-          <div className="flex flex-wrap justify-center gap-2 mb-2">
-            {sections.map((section) => {
-              const key = section.en;
-              const isOpen = openSection === key;
-              const label = lang === "hy" ? section.hy : section.en;
-
-              return (
-                <button
-                  key={key}
-                  onClick={() => toggle(key)}
-                  aria-expanded={isOpen}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-200 ${
-                    isOpen
-                      ? "bg-accent text-background border-accent"
-                      : "bg-card text-foreground border-border hover:border-accent hover:text-accent"
-                  }`}
-                >
-                  {label}
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Dropdown Panel */}
-          <div className="relative mt-4">
-            {sections.map((section) => {
-              const key = section.en;
-              const isOpen = openSection === key;
-
-              return (
-                <div
-                  key={key}
-                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
-                  }`}
-                >
-                  <div className="border border-border rounded-2xl bg-card p-8 shadow-sm">
-                    <h3 className="font-serif text-2xl md:text-3xl text-primary italic mb-6 pb-4 border-b border-border">
-                      {lang === "hy" ? section.hy : section.en}
-                    </h3>
-                    <ul className="grid sm:grid-cols-2 gap-x-12 gap-y-5">
-                      {section.items.map((item, i) => (
-                        <li key={i}>
-                          <div className="flex items-baseline gap-3">
-                            <h4 className="text-base text-foreground font-normal">
-                              {lang === "hy" ? item.hy : item.en}
-                            </h4>
-                            <span className="flex-1 dotted-leader h-3" aria-hidden />
-                            <span className="text-base text-accent font-medium whitespace-nowrap">
-                              {item.price} {item.price !== "—" && t.currency}
-                            </span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
+            return (
+              <button
+                key={key}
+                onClick={() => scrollToSection(key)}
+                className={`px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-accent text-background border-accent"
+                    : "bg-card text-foreground border-border hover:border-accent hover:text-accent"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
+
+        {/* Full Menu Grid */}
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-20 max-w-5xl mx-auto">
+          {sections.map((section) => {
+            const key = section.en;
+
+            return (
+              <div
+                key={key}
+                ref={(el) => { sectionRefs.current[key] = el; }}
+                className="scroll-mt-8"
+              >
+                <h3 className="font-serif text-2xl md:text-3xl text-primary mb-8 italic border-b border-border pb-4">
+                  {lang === "hy" ? section.hy : section.en}
+                </h3>
+                <ul className="space-y-5">
+                  {section.items.map((item, i) => (
+                    <li key={i}>
+                      <div className="flex items-baseline gap-3">
+                        <h4 className="text-base md:text-lg text-foreground font-normal">
+                          {lang === "hy" ? item.hy : item.en}
+                        </h4>
+                        <span className="flex-1 dotted-leader h-3" aria-hidden />
+                        <span className="text-base md:text-lg text-accent font-medium whitespace-nowrap">
+                          {item.price} {item.price !== "—" && t.currency}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
