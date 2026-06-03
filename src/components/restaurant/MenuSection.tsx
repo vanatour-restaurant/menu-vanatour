@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { sections, type Lang } from "./menuData";
-import { ChevronDown, UtensilsCrossed } from "lucide-react";
 
 const ui = {
   hy: {
@@ -11,7 +10,6 @@ const ui = {
     currency: "֏",
     armenian: "Հայերեն",
     english: "English",
-    menuButton: "Ճաշացանկ",
   },
   en: {
     eyebrow: "Our Menu",
@@ -21,34 +19,12 @@ const ui = {
     currency: "AMD",
     armenian: "Հայերեն",
     english: "English",
-    menuButton: "Menu",
   },
 };
 
 const MenuSection = () => {
   const [lang, setLang] = useState<Lang>("hy");
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const t = ui[lang];
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const scrollToSection = (key: string) => {
-    setIsOpen(false);
-    setTimeout(() => {
-      sectionRefs.current[key]?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-  };
 
   return (
     <section id="menu" className="py-24 md:py-32 bg-background">
@@ -65,7 +41,7 @@ const MenuSection = () => {
         </div>
 
         {/* Language Toggle */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mb-16">
           <div
             role="tablist"
             aria-label="Language"
@@ -96,51 +72,10 @@ const MenuSection = () => {
           </div>
         </div>
 
-        {/* Single Menu Button + Dropdown */}
-        <div ref={dropdownRef} className="flex justify-center mb-16 relative">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            style={isOpen ? { backgroundColor: "#FFE8BE", color: "#000000", borderColor: "#FFE8BE" } : undefined}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-border bg-card text-foreground text-sm font-semibold uppercase tracking-[0.2em] transition-all duration-200 hover:border-accent hover:text-accent shadow-sm"
-          >
-            <UtensilsCrossed className="h-4 w-4" />
-            {t.menuButton}
-            <ChevronDown
-              className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          {/* Dropdown */}
-          {isOpen && (
-            <div className="absolute top-full mt-3 z-50 bg-card border border-border rounded-2xl shadow-2xl overflow-hidden min-w-[220px]">
-              {sections.map((section, i) => {
-                const key = section.en;
-                const label = lang === "hy" ? section.hy : section.en;
-                return (
-                  <button
-                    key={key}
-                    onClick={() => scrollToSection(key)}
-                    className={`w-full text-left px-6 py-3.5 text-sm font-medium text-foreground hover:bg-accent/20 hover:text-accent transition-colors ${
-                      i !== 0 ? "border-t border-border" : ""
-                    }`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Full Menu Grid (always visible) */}
+        {/* Full Menu Grid */}
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-20 max-w-5xl mx-auto">
           {sections.map((section) => (
-            <div
-              key={section.en}
-              ref={(el) => { sectionRefs.current[section.en] = el; }}
-              className="scroll-mt-8"
-            >
+            <div key={section.en}>
               <h3 className="font-serif text-2xl md:text-3xl text-primary mb-8 italic border-b border-border pb-4">
                 {lang === "hy" ? section.hy : section.en}
               </h3>
