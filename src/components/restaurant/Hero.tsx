@@ -4,22 +4,22 @@ import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/vanatour-logo.jpg";
 
 const categories = [
-  "Նախուտեստներ",
-  "Աղցաններ",
-  "Ապուրներ",
-  "Տաք ուտեստներ",
-  "Խորոված ձուկ",
-  "Խավարտներ",
-  "Կանաչեղեն",
-  "Ձվածեղ",
-  "Սոուսներ",
-  "Աղանդեր",
-  "Օղի",
-  "Գինի",
-  "Վիսկի, Ջին, Տեկիլա, Ռոմ",
-  "Զովացուցիչ ըմպելիքներ",
-  "Գարեջուր",
-  "Գարեջրի խորտիկներ",
+  { label: "Նախուտեստներ", id: "section-Appetizers" },
+  { label: "Աղցաններ", id: "section-Salads" },
+  { label: "Ապուրներ", id: "section-Soups" },
+  { label: "Տաք ուտեստներ", id: "section-Hot Dishes" },
+  { label: "Խորոված ձուկ", id: "section-Grilled Fish" },
+  { label: "Խավարտներ", id: "section-Sides" },
+  { label: "Կանաչեղեն", id: "section-Greens" },
+  { label: "Ձվածեղ", id: "section-Egg Dishes" },
+  { label: "Սոուսներ", id: "section-Sauces" },
+  { label: "Աղանդեր", id: "section-Desserts" },
+  { label: "Օղի", id: "section-Vodka" },
+  { label: "Գինի", id: "section-Wine" },
+  { label: "Վիսկի, Ջին, Տեկիլա, Ռոմ", id: "section-Whisky, Gin, Tequila, Rum" },
+  { label: "Զովացուցիչ ըմպելիքներ", id: "section-Beverages" },
+  { label: "Գարեջուր", id: "section-Beer" },
+  { label: "Գարեջրի խորտիկներ", id: "section-Beer Snacks" },
 ];
 
 const Hero = () => {
@@ -37,7 +37,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center">
       <img
         src={heroBg}
         alt="Vanatour candlelit dining room"
@@ -61,8 +61,7 @@ const Hero = () => {
           Բարի գալուստ Վանատուր Ռեստորան
         </p>
 
-        {/* Dropdown Menu Button */}
-        <div ref={dropdownRef} className="relative">
+        <div ref={dropdownRef} className="relative z-20">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="inline-flex items-center gap-2 px-8 py-3 rounded-md text-base font-medium hover:opacity-90 transition-opacity"
@@ -77,7 +76,10 @@ const Hero = () => {
           </button>
 
           {menuOpen && (
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 bg-card border border-border rounded-2xl shadow-2xl overflow-y-auto min-w-[220px] max-h-[60vh]">
+            <div
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 bg-white border border-gray-200 rounded-2xl shadow-2xl min-w-[220px]"
+              style={{ maxHeight: "50vh", overflowY: "auto" }}
+            >
               {categories.map((cat, i) => (
                 <button
                   key={i}
@@ -85,15 +87,15 @@ const Hero = () => {
                     setMenuOpen(false);
                     setTimeout(() => {
                       document
-                        .getElementById("menu")
+                        .getElementById(cat.id)
                         ?.scrollIntoView({ behavior: "smooth", block: "start" });
                     }, 100);
                   }}
-                  className={`w-full text-left px-6 py-3 text-sm font-medium text-foreground hover:bg-accent/20 hover:text-accent transition-colors ${
-                    i !== 0 ? "border-t border-border" : ""
+                  className={`w-full text-left px-6 py-3 text-sm font-medium text-gray-800 hover:bg-amber-50 hover:text-amber-700 transition-colors ${
+                    i !== 0 ? "border-t border-gray-100" : ""
                   }`}
                 >
-                  {cat}
+                  {cat.label}
                 </button>
               ))}
             </div>
