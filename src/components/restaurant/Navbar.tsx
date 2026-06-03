@@ -17,11 +17,10 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const scrollToSection = () => {
+  const scrollToMenu = () => {
     setMenuOpen(false);
     setTimeout(() => {
-      const el = document.getElementById("menu");
-      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
   };
 
@@ -29,7 +28,6 @@ const Navbar = () => {
     <header className="absolute top-0 left-0 right-0 z-30">
       <nav className="container flex items-center justify-between py-6">
 
-        {/* Logo */}
         <a href="#" className="flex items-center gap-3">
           <img
             src={logo}
@@ -40,11 +38,10 @@ const Navbar = () => {
           />
         </a>
 
-        {/* Nav Links */}
-        <ul className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-10">
 
-          {/* Մենյու dropdown */}
-          <li ref={dropdownRef} className="relative">
+          {/* Մենյու with dropdown */}
+          <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center gap-1 text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
@@ -60,7 +57,7 @@ const Navbar = () => {
                 {sections.map((section, i) => (
                   <button
                     key={section.en}
-                    onClick={scrollToSection}
+                    onClick={scrollToMenu}
                     className={`w-full text-left px-6 py-3 text-sm font-medium text-foreground hover:bg-accent/20 hover:text-accent transition-colors ${
                       i !== 0 ? "border-t border-border" : ""
                     }`}
@@ -70,19 +67,17 @@ const Navbar = () => {
                 ))}
               </div>
             )}
-          </li>
+          </div>
 
           {/* Հետադարձ կապ */}
-          <li>
-            
-              href="#visit"
-              className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
-            >
-              Հետադարձ կապ
-            </a>
-          </li>
+          
+            href="#visit"
+            className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
+          >
+            Հետադարձ կապ
+          </a>
 
-        </ul>
+        </div>
       </nav>
     </header>
   );
