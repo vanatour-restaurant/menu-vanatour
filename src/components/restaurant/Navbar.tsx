@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import logo from "@/assets/vanatour-logo.jpg";
-import { sections } from "@/components/menuData";
+import { sections } from "./menuData";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
