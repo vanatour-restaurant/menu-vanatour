@@ -1,8 +1,41 @@
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/vanatour-logo.jpg";
-import { Button } from "@/components/ui/button";
+
+const categories = [
+  "Նախուտեստներ",
+  "Աղցաններ",
+  "Ապուրներ",
+  "Տաք ուտեստներ",
+  "Խորոված ձուկ",
+  "Խավարտներ",
+  "Կանաչեղեն",
+  "Ձվածեղ",
+  "Սոուսներ",
+  "Աղանդեր",
+  "Օղի",
+  "Գինի",
+  "Վիսկի, Ջին, Տեկիլա, Ռոմ",
+  "Զովացուցիչ ըմպելիքներ",
+  "Գարեջուր",
+  "Գարեջրի խորտիկներ",
+];
 
 const Hero = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <img
@@ -27,14 +60,45 @@ const Hero = () => {
         >
           Բարի գալուստ Վանատուր Ռեստորան
         </p>
-        <Button
-          asChild
-          size="lg"
-          className="hover:opacity-90"
-          style={{ backgroundColor: "#FFE8BE", color: "#000000" }}
-        >
-          <a href="#menu">Մենյու</a>
-        </Button>
+
+        {/* Dropdown Menu Button */}
+        <div ref={dropdownRef} className="relative">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-md text-base font-medium hover:opacity-90 transition-opacity"
+            style={{ backgroundColor: "#FFE8BE", color: "#000000" }}
+          >
+            Մենյու
+            <ChevronDown
+              className={`h-4 w-4 transition-transform duration-200 ${
+                menuOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {menuOpen && (
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 bg-card border border-border rounded-2xl shadow-2xl overflow-y-auto min-w-[220px] max-h-[60vh]">
+              {categories.map((cat, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setTimeout(() => {
+                      document
+                        .getElementById("menu")
+                        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 100);
+                  }}
+                  className={`w-full text-left px-6 py-3 text-sm font-medium text-foreground hover:bg-accent/20 hover:text-accent transition-colors ${
+                    i !== 0 ? "border-t border-border" : ""
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
