@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sections, type Lang } from "./menuData";
+import { ChevronDown } from "lucide-react";
 
 const ui = {
   hy: {
@@ -24,11 +25,21 @@ const ui = {
 
 const MenuSection = () => {
   const [lang, setLang] = useState<Lang>("hy");
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
   const t = ui[lang];
+
+  const toggle = (key: string) => {
+    setOpenSections((prev) => {
+      const next = new Set(prev);
+      next.has(key) ? next.delete(key) : next.add(key);
+      return next;
+    });
+  };
 
   return (
     <section id="menu" className="py-24 md:py-32 bg-background">
       <div className="container">
+        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs uppercase tracking-[0.4em] text-accent mb-4">{t.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl text-primary mb-6">
@@ -38,6 +49,7 @@ const MenuSection = () => {
           <p className="text-muted-foreground">{t.subtitle}</p>
         </div>
 
+        {/* Language Toggle */}
         <div className="flex justify-center mb-16">
           <div
             role="tablist"
@@ -69,29 +81,56 @@ const MenuSection = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-x-16 gap-y-20 max-w-5xl mx-auto">
-          {sections.map((section) => (
-            <div key={section.en}>
-              <h3 className="font-serif text-2xl md:text-3xl text-primary mb-8 italic border-b border-border pb-4">
-                {lang === "hy" ? section.hy : section.en}
-              </h3>
-              <ul className="space-y-5">
-                {section.items.map((item, i) => (
-                  <li key={i}>
-                    <div className="flex items-baseline gap-3">
-                      <h4 className="text-base md:text-lg text-foreground font-normal">
-                        {lang === "hy" ? item.hy : item.en}
-                      </h4>
-                      <span className="flex-1 dotted-leader h-3" aria-hidden />
-                      <span className="text-base md:text-lg text-accent font-medium whitespace-nowrap">
-                        {item.price} {item.price !== "—" && t.currency}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        {/* Accordion Sections */}
+        <div className="max-w-2xl mx-auto divide-y divide-border border-t border-border">
+          {sections.map((section) => {
+            const key = section.en;
+            const isOpen = openSections.has(key);
+            const label = lang === "hy" ? section.hy : section.en;
+
+            return (
+              <div key={key}>
+                {/* Section Header — clickable */}
+                <button
+                  onClick={() => toggle(key)}
+                  className="w-full flex items-center justify-between py-5 text-left group"
+                  aria-expanded={isOpen}
+                >
+                  <h3 className="font-serif text-2xl md:text-3xl text-primary italic group-hover:text-accent transition-colors">
+                    {label}
+                  </h3>
+                  <ChevronDown
+                    className={`h-5 w-5 text-accent transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Collapsible Items */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-[2000px] opacity-100 mb-6" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <ul className="space-y-5 pt-2 pb-4">
+                    {section.items.map((item, i) => (
+                      <li key={i}>
+                        <div className="flex items-baseline gap-3">
+                          <h4 className="text-base md:text-lg text-foreground font-normal">
+                            {lang === "hy" ? item.hy : item.en}
+                          </h4>
+                          <span className="flex-1 dotted-leader h-3" aria-hidden />
+                          <span className="text-base md:text-lg text-accent font-medium whitespace-nowrap">
+                            {item.price} {item.price !== "—" && t.currency}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
