@@ -75,7 +75,7 @@ const Navbar = () => {
 
           {/* Հետադարձ կապ */}
           <li>
-            
+            <a
               href="#visit"
               className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
             >
