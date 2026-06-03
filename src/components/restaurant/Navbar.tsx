@@ -1,14 +1,35 @@
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import logo from "@/assets/vanatour-logo.jpg";
-
-const links = [
-  { label: "Մենյու", href: "#menu" },
-  { label: "Հետադարձ կապ", href: "#visit" },
-];
+import { sections } from "@/components/menuData";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    setMenuOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
       <nav className="container flex items-center justify-between py-6">
+        {/* Logo */}
         <a href="#" className="flex items-center gap-3">
           <img
             src={logo}
@@ -18,17 +39,49 @@ const Navbar = () => {
             className="h-12 w-12 object-contain"
           />
         </a>
+
         <ul className="hidden md:flex items-center gap-10">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
+          {/* Մենյու with dropdown */}
+          <li>
+            <div ref={dropdownRef} className="relative">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="flex items-center gap-1 text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
               >
-                {l.label}
-              </a>
-            </li>
-          ))}
+                Մենյու
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {/* Dropdown */}
+              {menuOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 bg-card border border-border rounded-2xl shadow-2xl overflow-hidden min-w-[200px]">
+                  {sections.map((section, i) => (
+                    <button
+                      key={section.en}
+                      onClick={() => scrollToSection("menu")}
+                      className={`w-full text-left px-6 py-3 text-sm font-medium text-foreground hover:bg-accent/20 hover:text-accent transition-colors ${
+                        i !== 0 ? "border-t border-border" : ""
+                      }`}
+                    >
+                      {section.hy}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </li>
+
+          {/* Հետադարձ կապ */}
+          <li>
+            
+              href="#visit"
+              className="text-sm uppercase tracking-[0.2em] text-background/90 hover:text-gold transition-colors"
+            >
+              Հետադարձ կապ
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
