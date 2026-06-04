@@ -29,8 +29,6 @@ const MenuSection = () => {
   return (
     <section id="menu" className="py-24 md:py-32 bg-background">
       <div className="container">
-
-        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs uppercase tracking-[0.4em] text-accent mb-4">{t.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl text-primary mb-6">
@@ -40,7 +38,6 @@ const MenuSection = () => {
           <p className="text-muted-foreground">{t.subtitle}</p>
         </div>
 
-        {/* Language Toggle */}
         <div className="flex justify-center mb-16">
           <div
             role="tablist"
@@ -72,10 +69,13 @@ const MenuSection = () => {
           </div>
         </div>
 
-        {/* Full Menu Grid */}
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-20 max-w-5xl mx-auto">
           {sections.map((section) => (
-            <div key={section.en}>
+            <div
+              key={section.en}
+              id={`section-${section.en}`}
+              className="scroll-mt-24"
+            >
               <h3 className="font-serif text-2xl md:text-3xl text-primary mb-8 italic border-b border-border pb-4">
                 {lang === "hy" ? section.hy : section.en}
               </h3>
@@ -97,7 +97,6 @@ const MenuSection = () => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
