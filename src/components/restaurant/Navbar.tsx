@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-30 bg-black/ backdrop-bg-black">
+    <header className="fixed top-0 left-0 right-0 z-30 bg-black/100 backdrop-bg-black">
       <nav className="container flex items-center justify-between py-4">
         {/* Logo - left */}
         <a href="#" className="flex items-center gap-3">
